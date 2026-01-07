@@ -9,8 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import type { Supplier } from "@/lib/types"
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
+import { API_URL } from "@/lib/api"
 const supplierSchema = z.object({
   name: z.string().min(1, "El nombre es obligatorio"),
   email: z.string().email().optional().or(z.literal("")),

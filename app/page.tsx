@@ -5,9 +5,11 @@ import { StockTrendsChart } from "@/components/stock-trends-chart"
 import { Package, FolderTree, Truck, AlertTriangle } from "lucide-react"
 import type { DashboardStats } from "@/lib/types"
 
+import { API_URL } from "@/lib/api"
+
 async function getDashboardStats(): Promise<DashboardStats> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/stats`, {
+    const res = await fetch(`${API_URL}/api/stats`, {
       cache: "no-store",
     })
 

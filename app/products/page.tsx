@@ -8,6 +8,7 @@ import { ProductsTable } from "@/components/products-table"
 import { ProductForm } from "@/components/product-form"
 import { Plus, Search } from "lucide-react"
 import type { Product } from "@/lib/types"
+import { API_URL } from "@/lib/api"
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
@@ -18,7 +19,6 @@ export default function ProductsPage() {
 
   async function fetchProducts() {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
       const res = await fetch(`${API_URL}/api/products`)
       if (!res.ok) {
         const errorBody = await res.text()
@@ -75,7 +75,7 @@ export default function ProductsPage() {
         </div>
         <Button onClick={() => setIsCreating(true)}>
           <Plus className="h-4 w-4 mr-2" />
-            Agregar producto
+          Agregar producto
         </Button>
       </div>
 
@@ -100,7 +100,7 @@ export default function ProductsPage() {
       )}
 
       <Dialog open={isCreating} onOpenChange={setIsCreating}>
-          <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Agregar nuevo producto</DialogTitle>
             <DialogDescription>Ingresa la información del producto</DialogDescription>

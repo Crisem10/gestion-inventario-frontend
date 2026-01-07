@@ -17,6 +17,7 @@ import {
 import { SupplierForm } from "@/components/supplier-form"
 import { Plus, Pencil, Trash2, Package, Mail, Phone, MapPin } from "lucide-react"
 import type { Supplier } from "@/lib/types"
+import { API_URL } from "@/lib/api"
 
 interface SupplierWithCount extends Supplier {
   product_count: number
@@ -31,7 +32,6 @@ export default function SuppliersPage() {
 
   async function fetchSuppliers() {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
       const res = await fetch(`${API_URL}/api/suppliers`)
       const data = await res.json()
       setSuppliers(data)
@@ -50,7 +50,6 @@ export default function SuppliersPage() {
     if (!deletingSupplier) return
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
       const res = await fetch(`${API_URL}/api/suppliers/${deletingSupplier.id}`, {
         method: "DELETE",
       })
@@ -74,7 +73,7 @@ export default function SuppliersPage() {
         </div>
         <Button onClick={() => setIsCreating(true)}>
           <Plus className="h-4 w-4 mr-2" />
-            Agregar proveedor
+          Agregar proveedor
         </Button>
       </div>
 
@@ -132,14 +131,14 @@ export default function SuppliersPage() {
 
           {suppliers.length === 0 && (
             <div className="col-span-full text-center py-12">
-                <p className="text-muted-foreground">No hay proveedores. Agrega tu primer proveedor.</p>
-              </div>
+              <p className="text-muted-foreground">No hay proveedores. Agrega tu primer proveedor.</p>
+            </div>
           )}
         </div>
       )}
 
       <Dialog open={isCreating} onOpenChange={setIsCreating}>
-          <DialogContent>
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Agregar nuevo proveedor</DialogTitle>
             <DialogDescription>Agrega un nuevo proveedor a tu sistema</DialogDescription>
@@ -155,7 +154,7 @@ export default function SuppliersPage() {
       </Dialog>
 
       <Dialog open={!!editingSupplier} onOpenChange={() => setEditingSupplier(null)}>
-          <DialogContent>
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Editar proveedor</DialogTitle>
             <DialogDescription>Actualiza la información del proveedor</DialogDescription>
@@ -174,7 +173,7 @@ export default function SuppliersPage() {
       </Dialog>
 
       <AlertDialog open={!!deletingSupplier} onOpenChange={() => setDeletingSupplier(null)}>
-          <AlertDialogContent>
+        <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
             <AlertDialogDescription>

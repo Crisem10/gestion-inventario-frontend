@@ -17,6 +17,7 @@ import {
 import { CategoryForm } from "@/components/category-form"
 import { Plus, Pencil, Trash2, Package } from "lucide-react"
 import type { Category } from "@/lib/types"
+import { API_URL } from "@/lib/api"
 
 interface CategoryWithCount extends Category {
   product_count: number
@@ -31,7 +32,6 @@ export default function CategoriesPage() {
 
   async function fetchCategories() {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
       const res = await fetch(`${API_URL}/api/categories`)
       const data = await res.json()
       setCategories(data)
@@ -50,7 +50,6 @@ export default function CategoriesPage() {
     if (!deletingCategory) return
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
       const res = await fetch(`${API_URL}/api/categories/${deletingCategory.id}`, {
         method: "DELETE",
       })
@@ -74,7 +73,7 @@ export default function CategoriesPage() {
         </div>
         <Button onClick={() => setIsCreating(true)}>
           <Plus className="h-4 w-4 mr-2" />
-            Agregar categoría
+          Agregar categoría
         </Button>
       </div>
 
@@ -103,7 +102,7 @@ export default function CategoriesPage() {
               <CardContent>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Package className="h-4 w-4" />
-                    <span>
+                  <span>
                     {category.product_count} {category.product_count === 1 ? "producto" : "productos"}
                   </span>
                 </div>
@@ -112,7 +111,7 @@ export default function CategoriesPage() {
           ))}
 
           {categories.length === 0 && (
-              <div className="col-span-full text-center py-12">
+            <div className="col-span-full text-center py-12">
               <p className="text-muted-foreground">No hay categorías. Crea tu primera categoría.</p>
             </div>
           )}
@@ -120,7 +119,7 @@ export default function CategoriesPage() {
       )}
 
       <Dialog open={isCreating} onOpenChange={setIsCreating}>
-          <DialogContent>
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Agregar nueva categoría</DialogTitle>
             <DialogDescription>Crea una nueva categoría para organizar tus productos</DialogDescription>
@@ -136,7 +135,7 @@ export default function CategoriesPage() {
       </Dialog>
 
       <Dialog open={!!editingCategory} onOpenChange={() => setEditingCategory(null)}>
-          <DialogContent>
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Editar categoría</DialogTitle>
             <DialogDescription>Actualiza la información de la categoría</DialogDescription>
@@ -155,7 +154,7 @@ export default function CategoriesPage() {
       </Dialog>
 
       <AlertDialog open={!!deletingCategory} onOpenChange={() => setDeletingCategory(null)}>
-          <AlertDialogContent>
+        <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
             <AlertDialogDescription>

@@ -18,8 +18,8 @@ import {
 import { Pencil, Trash2, AlertTriangle } from "lucide-react"
 import { ProductForm } from "./product-form"
 import type { Product } from "@/lib/types"
+import { API_URL } from "@/lib/api"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
 interface ProductsTableProps {
   products: Product[]
   onUpdate: () => void
@@ -65,7 +65,7 @@ export function ProductsTable({ products, onUpdate }: ProductsTableProps) {
           <TableBody>
             {!Array.isArray(products) ? (
               <TableRow>
-                  <TableCell colSpan={7} className="text-center text-destructive">
+                <TableCell colSpan={7} className="text-center text-destructive">
                   Datos de productos inválidos
                 </TableCell>
               </TableRow>
@@ -97,9 +97,9 @@ export function ProductsTable({ products, onUpdate }: ProductsTableProps) {
                       <span>{product.stock}</span>
                       {product.stock < product.min_stock && (
                         <Badge variant="destructive" className="gap-1">
-                            <AlertTriangle className="h-3 w-3" />
-                            Bajo
-                          </Badge>
+                          <AlertTriangle className="h-3 w-3" />
+                          Bajo
+                        </Badge>
                       )}
                     </div>
                   </TableCell>
@@ -121,7 +121,7 @@ export function ProductsTable({ products, onUpdate }: ProductsTableProps) {
       </div>
 
       <Dialog open={!!editingProduct} onOpenChange={() => setEditingProduct(null)}>
-            <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Editar producto</DialogTitle>
             <DialogDescription>Actualiza la información del producto</DialogDescription>
@@ -141,7 +141,7 @@ export function ProductsTable({ products, onUpdate }: ProductsTableProps) {
 
       <AlertDialog open={!!deletingProduct} onOpenChange={() => setDeletingProduct(null)}>
         <AlertDialogContent>
-            <AlertDialogHeader>
+          <AlertDialogHeader>
             <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
             <AlertDialogDescription>
               Esto eliminará permanentemente el producto "{deletingProduct?.name}". Esta acción no se puede deshacer.

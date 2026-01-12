@@ -5,6 +5,8 @@ import { StockTrendsChart } from "@/components/stock-trends-chart"
 import { Package, FolderTree, Truck, AlertTriangle } from "lucide-react"
 import type { DashboardStats } from "@/lib/types"
 
+export const dynamic = "force-dynamic"
+
 async function getDashboardStats(): Promise<DashboardStats> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/stats`, {
